@@ -27,6 +27,7 @@ public class Attendance {
     @JoinColumn(name = "subjectId", referencedColumnName = "subjectId")
     private Subject subject;
 
+
     @ManyToOne
     @JoinColumn(name = "learners_id", referencedColumnName = "learnersId")
     private Student student;

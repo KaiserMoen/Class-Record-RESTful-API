@@ -1,7 +1,7 @@
 package project.classrecordapi.controller;
 
 import java.util.List;
-
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.classrecordapi.dto.SubjectDto;
 import project.classrecordapi.entities.Attendance;
+import project.classrecordapi.entities.Student;
 import project.classrecordapi.entities.Subject;
 import project.classrecordapi.service.SubjectService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,12 +48,15 @@ public class SubjectController {
         subjectService.deleteSubject(subjectId);
         return "Subject Successfully deleted";
     }
-
-     @PutMapping("{subjectId}/add/{studentId}")
+    
+    @PutMapping("{subjectId}/add/{studentId}")
     public Subject addStudentToSubject(@PathVariable Integer subjectId, @PathVariable Integer studentId){
         return subjectService.addStudentToSubject(subjectId, studentId);
     }
-
+    @GetMapping("/{subjectId}/students")
+    public Set<Student> getEnrolledStudents(@PathVariable Integer subjectId){
+        return subjectService.getAllEnrolledStudent(subjectId);
+    }
     @GetMapping("/{subjectId}/attendances")
     public List<Attendance> getAttendanceOfSubject(@PathVariable Integer subjectId){
         return subjectService.getAttendanceRecord(subjectId);

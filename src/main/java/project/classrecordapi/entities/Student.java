@@ -47,7 +47,7 @@ public class Student {
     @ManyToMany(mappedBy = "enrolledStudents",fetch = FetchType.EAGER)
     private Set<Subject> subject = new HashSet<>();
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
     private Set<Scores> scores = new HashSet<>();
     //Getters and Setters

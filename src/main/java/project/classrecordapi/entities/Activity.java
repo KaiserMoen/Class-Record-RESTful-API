@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,14 +38,11 @@ public class Activity {
 
     private Integer finalScore;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "activity" , cascade = CascadeType.ALL)
     private Set<Scores> scores = new HashSet<>();
 
-    
-   
     //Getters and Setters
-    
-    
     public Subject getSubject() {
         return subject;
     }

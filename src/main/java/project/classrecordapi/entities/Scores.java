@@ -14,6 +14,7 @@ public class Scores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer scoreId;
+
     @ManyToOne
     @JoinColumn(name = "activityId" , referencedColumnName = "activityId")
     private Activity activity;
@@ -23,7 +24,6 @@ public class Scores {
     @JoinColumn(name = "learnersId", referencedColumnName = "learnersId")
     private Student student;
 
-    
     private Date dateSubmitted;
     
     private Integer score;

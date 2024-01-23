@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,10 +33,11 @@ public class Subject {
 
     //Relationship with the Teacher Entity
     @ManyToOne
-    @JoinColumn(name = "teacher_id" , referencedColumnName = "teacherId")
+    @JoinColumn(name = "teacherId" , referencedColumnName = "teacherId")
     private Teacher teacher;
 
     //Relationship with the Student Entity (A Subject can Have multiple Student and vice versa)
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "student_enrolled",
@@ -44,10 +47,12 @@ public class Subject {
     private Set<Student> enrolledStudents = new HashSet<>();
 
     //Relationship with the Attentance Entity(A subject will have Multiple Attendances of the students)
+    @JsonIgnore
     @OneToMany(mappedBy = "subject" , cascade = CascadeType.ALL)
     private Set<Attendance> attendances = new HashSet<>();
 
     //Relationsip with the Activity Entity(A subject will have multiple Activities)
+    @JsonIgnore
     @OneToMany(mappedBy = "subject" , cascade = CascadeType.ALL)
     private Set<Activity> activities = new HashSet<>();
 

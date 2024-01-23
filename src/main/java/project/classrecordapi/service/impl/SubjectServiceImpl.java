@@ -93,6 +93,11 @@ public class SubjectServiceImpl implements SubjectService{
    
 
     @Override
+    public Set<Student> getAllEnrolledStudent(Integer subjectId){
+        if(subjectId == null) throw new IllegalArgumentException("Subject Id is null");
+        return studentRepository.findBySubjectSubjectId(subjectId);
+    }
+    @Override
     @Transactional
     public Subject addStudentToSubject(Integer subjectId, Integer studentId){
         Subject subject;
