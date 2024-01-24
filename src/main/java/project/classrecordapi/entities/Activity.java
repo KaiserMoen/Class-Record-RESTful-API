@@ -22,12 +22,14 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer activityId;
 
+    
     @ManyToOne
     @JoinColumn(name = "subjectId", referencedColumnName = "subjectId")
     private Subject subject;
     
     private String activityName;
     
+    //Written = 0 , Performance Task = 1, Exam = 2
     private Integer activityType;
 
     private String activityDescription;
@@ -43,6 +45,12 @@ public class Activity {
     private Set<Scores> scores = new HashSet<>();
 
     //Getters and Setters
+    public Integer getActivityId() {
+        return activityId;
+    }
+    public void setActivityId(Integer activityId) {
+        this.activityId = activityId;
+    }
     public Subject getSubject() {
         return subject;
     }

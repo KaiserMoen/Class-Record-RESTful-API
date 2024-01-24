@@ -1,10 +1,12 @@
 package project.classrecordapi.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import project.classrecordapi.dto.SubjectDto;
 import project.classrecordapi.entities.Attendance;
+import project.classrecordapi.entities.Grades;
 import project.classrecordapi.entities.Student;
 import project.classrecordapi.entities.Subject;
 
@@ -26,5 +28,7 @@ public interface SubjectService {
     List<Attendance> getAttendanceRecord(Integer subjectId);
 
     List<Attendance> getAttendanceRecord(Integer subjectId, Integer month);
-    
+
+    Set<Grades> calculateGrades(Integer subjectId, Integer[] gradeRatio, Date starDate, Date endDate);
+
 }

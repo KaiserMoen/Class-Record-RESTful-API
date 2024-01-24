@@ -8,9 +8,9 @@ server:
 spring:
     datasource: 
         driver-class-name: com.mysql.cj.jdbc.Driver
-        username: root
-        url: jdbc:mysql://localhost:3306/classrecord
-        password: Napeekkaiser12
+        username: freedb_Kaiser
+        url: jdbc:mysql://sql.freedb.tech:3306/freedb_classrecordapi
+        password: ED8TZYSs?73hr9h
     jpa:
         hibernate:
             ddl-auto: update

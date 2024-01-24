@@ -16,6 +16,7 @@ import project.classrecordapi.dto.SubjectDto;
 import project.classrecordapi.dto.mapper.SubjectMapper;
 import project.classrecordapi.entities.Activity;
 import project.classrecordapi.entities.Attendance;
+import project.classrecordapi.entities.Grades;
 import project.classrecordapi.entities.Scores;
 import project.classrecordapi.entities.Student;
 import project.classrecordapi.entities.Subject;
@@ -170,5 +171,16 @@ public class SubjectServiceImpl implements SubjectService{
         
         return attendanceRepository.findBySubjectSubjectIdAndAbsentDateBetween(subjectId, startDate, endDate);
     }
+
+    @Override
+    public Set<Grades> calculateGrades(Integer subjectId, Integer[] gradeRatio, Date startDate, Date endDate){
+        if(subjectId == null) throw new IllegalArgumentException("subject Id is null");
+        Optional<Subject> oSubject = subjectRepository.findById(subjectId);
+        if(!oSubject.isPresent()) throw new NoSuchElementException("Subject with the ID "+subjectId +" is not found");
+        Subject subject = oSubject.get();
+
+        return null;
+    }
+
    
 }

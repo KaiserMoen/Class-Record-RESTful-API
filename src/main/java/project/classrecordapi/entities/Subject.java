@@ -56,7 +56,9 @@ public class Subject {
     @OneToMany(mappedBy = "subject" , cascade = CascadeType.ALL)
     private Set<Activity> activities = new HashSet<>();
 
-    
+    @JsonIgnore
+    @OneToMany(mappedBy = "subject" , cascade = CascadeType.ALL)
+    private Set<Grades> grades = new HashSet<>();
 
     @NonNull
     private String subjectCode;
@@ -65,6 +67,9 @@ public class Subject {
     private Date subjectStartDate;
     @NonNull
     private Date subjectEndDate;
+    private Integer gradeLevel;
+
+    
 
     //Setters and Getters
     public Integer getSubjectId() {
@@ -129,5 +134,13 @@ public class Subject {
 
     public void setActivities(Set<Activity> activities) {
         this.activities = activities;
+    }
+
+    public Integer getGradeLevel() {
+        return gradeLevel;
+    }
+
+    public void setGradeLevel(Integer gradeLevel) {
+        this.gradeLevel = gradeLevel;
     }
 }

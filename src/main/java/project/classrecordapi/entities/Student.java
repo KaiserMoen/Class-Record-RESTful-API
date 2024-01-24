@@ -50,7 +50,20 @@ public class Student {
     @JsonIgnore
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
     private Set<Scores> scores = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
+    private Set<Grades> grades = new HashSet<>();
+    
     //Getters and Setters
+
+    public Set<Grades> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<Grades> grades) {
+        this.grades = grades;
+    }
 
     public Set<Attendance> getAttendances() {
         return attendances;
