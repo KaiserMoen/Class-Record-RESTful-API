@@ -1,5 +1,6 @@
 package project.classrecordapi.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -64,6 +65,13 @@ public class SubjectController {
     @GetMapping("/{subjectId}/attendances/month")
     public List<Attendance> getMethodName(@RequestParam Integer month, @PathVariable Integer subjectId) {
         return subjectService.getAttendanceRecord(subjectId, month);
+    }
+
+    @PutMapping("/{subjectId}/calculateGrades")
+    public String calculateGrades(@PathVariable Integer subjectId, @RequestParam String gradeName ,@RequestParam Date startDate, @RequestParam Date endDate){
+        Integer[] rat = new Integer[]{40,40,20};
+        subjectService.calculateGrades(subjectId, rat, startDate, endDate, subjectId, gradeName);
+        return "Calculation Successful";
     }
     
 }

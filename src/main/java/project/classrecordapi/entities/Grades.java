@@ -1,5 +1,7 @@
 package project.classrecordapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +16,7 @@ public class Grades {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer gradeId;
 
-   
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "learnersId" , referencedColumnName="learnersId")
     private Student student;
@@ -24,11 +26,12 @@ public class Grades {
     @JoinColumn(name = "subjectId", referencedColumnName = "subjectId")
     private Subject subject;
 
+    
     private String gradingName;
     
     private Integer semester;
     
-    private Integer grade;
+    private Double grade;
 
 
 
@@ -44,6 +47,12 @@ public class Grades {
     public void setStudent(Student student) {
         this.student = student;
     }
+    public Subject getSubject() {
+        return subject;
+    }
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 
     public String getGradingName() {
         return gradingName;
@@ -57,10 +66,10 @@ public class Grades {
     public void setSemester(Integer semester) {
         this.semester = semester;
     }
-    public Integer getGrade() {
+    public Double getGrade() {
         return grade;
     }
-    public void setGrade(Integer grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
 

@@ -29,6 +29,6 @@ public interface SubjectService {
 
     List<Attendance> getAttendanceRecord(Integer subjectId, Integer month);
 
-    Set<Grades> calculateGrades(Integer subjectId, Integer[] gradeRatio, Date starDate, Date endDate);
+    Set<Grades> calculateGrades(Integer subjectId, Integer[] gradeRatio, Date starDate, Date endDate,Integer semester, String gradeName);
 
 }

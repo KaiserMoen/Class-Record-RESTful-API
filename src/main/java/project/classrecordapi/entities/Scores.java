@@ -2,6 +2,8 @@ package project.classrecordapi.entities;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,11 +17,13 @@ public class Scores {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer scoreId;
 
+    
     @ManyToOne
     @JoinColumn(name = "activityId" , referencedColumnName = "activityId")
     private Activity activity;
 
    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "learnersId", referencedColumnName = "learnersId")
     private Student student;
@@ -31,6 +35,12 @@ public class Scores {
    
     
     //Getters and Setters
+    public Integer getScoreId() {
+        return scoreId;
+    }
+    public void setScoreId(Integer scoreId) {
+        this.scoreId = scoreId;
+    }
     public Activity getActivity() {
         return activity;
     }

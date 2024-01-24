@@ -22,6 +22,7 @@ import project.classrecordapi.entities.Student;
 import project.classrecordapi.entities.Subject;
 import project.classrecordapi.entities.Teacher;
 import project.classrecordapi.repository.AttendanceRepository;
+import project.classrecordapi.repository.GradesRepository;
 import project.classrecordapi.repository.ScoresRepository;
 import project.classrecordapi.repository.StudentRepository;
 import project.classrecordapi.repository.SubjectRepository;
@@ -46,6 +47,9 @@ public class SubjectServiceImpl implements SubjectService{
 
     @Autowired
     ScoresRepository scoreRepository;
+
+    @Autowired
+    GradesRepository gradesRepository;
     
     @Override
     public Subject newSubject(Subject subject , Integer teacherId) {
@@ -173,14 +177,41 @@ public class SubjectServiceImpl implements SubjectService{
     }
 
     @Override
-    public Set<Grades> calculateGrades(Integer subjectId, Integer[] gradeRatio, Date startDate, Date endDate){
+    public Set<Grades> calculateGrades(Integer subjectId, Integer[] gradeRatio, Date startDate, Date endDate, Integer semester, String gradeName){
         if(subjectId == null) throw new IllegalArgumentException("subject Id is null");
         Optional<Subject> oSubject = subjectRepository.findById(subjectId);
         if(!oSubject.isPresent()) throw new NoSuchElementException("Subject with the ID "+subjectId +" is not found");
         Subject subject = oSubject.get();
 
+        for(Student student : subject.getEnrolledStudents()){
+            Double grade = calculateStudentGrade(subject,student,gradeRatio,startDate,endDate);
+            Grades grades = new Grades();
+            grades.setGrade(grade);
+            grades.setSemester(semester);                
+            grades.setGradingName(gradeName);
+            grades.setStudent(student);
+            grades.setSubject(subject);
+            gradesRepository.save(grades);
+        }
         return null;
     }
 
+    private Double calculateStudentGrade(Subject subject, Student student, Integer[] gradeRatio ,Date startDate, Date endDate){
+        Double currGrade = 0.0;
+        for(int i = 0 ; i < 3; i++){
+            Set<Scores> scores = scoreRepository.findByActivitySubjectSubjectIdAndActivityActivityTypeAndStudentLearnersIdAndActivityActivityStartDateBetween(
+                subject.getSubjectId(), i, student.getLearners_id(), startDate, endDate);
+            Double currScore = 0.0;
+            Double totalActivitiesScore = 0.0;
+            for(Scores s : scores){
+                currScore += s.getScore();
+                totalActivitiesScore += s.getActivity().getFinalScore();
+            }
+            currGrade += (currScore/totalActivitiesScore) * gradeRatio[i];
+           
+        }
+        System.out.println("currGrade: " +currGrade);
+        return currGrade;
+    }
    
 }

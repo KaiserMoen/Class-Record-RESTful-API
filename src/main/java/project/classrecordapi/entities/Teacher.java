@@ -26,13 +26,10 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer teacherId;
     
-    
     @NonNull
     private String email;
     @NonNull
     private String password;
-
-    
     private String teacherName;
     private String teacherMiddleName;
     private String teacherSurName;

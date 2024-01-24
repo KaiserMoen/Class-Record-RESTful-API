@@ -51,7 +51,6 @@ public class Student {
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
     private Set<Scores> scores = new HashSet<>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "student" , cascade = CascadeType.ALL)
     private Set<Grades> grades = new HashSet<>();
     
